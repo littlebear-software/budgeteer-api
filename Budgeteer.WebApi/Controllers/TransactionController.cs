@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Budgeteer.Models;
+using Budgeteer.Data.Contexts;
 
 namespace Budgeteer.WebApi.Controllers
 {
@@ -7,51 +8,44 @@ namespace Budgeteer.WebApi.Controllers
     [Route("api/[controller]")]
     public class TransactionController : ControllerBase
     {
-        [HttpGet]
-        public IEnumerable<Transaction> GetTransactions()
+
+        private readonly BudgeteerContext _transactionContext;
+
+        public TransactionController(BudgeteerContext context)
         {
-            return new Transaction[] {
-                new Transaction (
-                    "Taco Bell",
-                    24.99M,
-                    new Category (
-                        "Dining",
-                        "#9DBC98"
-                    )
-                ),
-                new Transaction (
-                    "Prattville Country Club",
-                    70.00M,
-                    new Category (
-                        "Entertainment",
-                        "#BB6464"
-                    )
-                ),
-                new Transaction (
-                    "Citgo",
-                    84.98M,
-                    new Category (
-                        "Automotive",
-                        "#7BD3EA"
-                    )
-                ),
-                new Transaction (
-                    "Beef O'Brady's",
-                    64.99M,
-                    new Category (
-                        "Dining",
-                        "#9DBC98"
-                    )
-                ),
-                new Transaction (
-                    "Walmart",
-                    245.88M,
-                    new Category (
-                        "Groceries",
-                        "#FDFFAE"
-                    )
-                ),
-            };
+            this._transactionContext = context;
+        }
+
+        [HttpGet]
+        public IEnumerable<Transaction> GetTransactions(int pageNumber = 0, int pageSize = 10)
+        {
+
+            var returns = new List<Transaction>() { };
+            var transactions = this._transactionContext.Transactions
+                .OrderBy(t => t.Id)
+                .Skip(pageNumber * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            foreach (var transaction in transactions)
+            {
+                var category = this._transactionContext.Categories.FirstOrDefault(category => category.Id == transaction.CategoryId);
+                returns.Add(new Transaction
+                {
+                    Id = transaction.Id,
+                    Vendor = transaction.Vendor,
+                    Amount = transaction.Amount,
+                    CategoryId = transaction.CategoryId,
+                    Category = new Category
+                    {
+                        Id = category.Id,
+                        Name = category.Name,
+                        Color = category.Color,
+                    },
+                });
+            }
+
+            return returns;
         }
     }
 }

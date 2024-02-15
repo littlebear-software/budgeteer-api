@@ -3,6 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Budgeteer.Data", "Budgeteer.Data\Budgeteer.Data.csproj", "{6A3FA99F-C7A6-46C1-B0E8-BF4149DE106C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Budgeteer.Models", "Budgeteer.Models\Budgeteer.Models.csproj", "{2426135F-172F-438B-85D4-0C257BBD6D06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Budgeteer.WebApi", "Budgeteer.WebApi\Budgeteer.WebApi.csproj", "{0D7B6951-D22A-4FB3-B61F-DD2A6E87904B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -10,5 +16,19 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6A3FA99F-C7A6-46C1-B0E8-BF4149DE106C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A3FA99F-C7A6-46C1-B0E8-BF4149DE106C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A3FA99F-C7A6-46C1-B0E8-BF4149DE106C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A3FA99F-C7A6-46C1-B0E8-BF4149DE106C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2426135F-172F-438B-85D4-0C257BBD6D06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2426135F-172F-438B-85D4-0C257BBD6D06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2426135F-172F-438B-85D4-0C257BBD6D06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2426135F-172F-438B-85D4-0C257BBD6D06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D7B6951-D22A-4FB3-B61F-DD2A6E87904B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D7B6951-D22A-4FB3-B61F-DD2A6E87904B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D7B6951-D22A-4FB3-B61F-DD2A6E87904B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D7B6951-D22A-4FB3-B61F-DD2A6E87904B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
