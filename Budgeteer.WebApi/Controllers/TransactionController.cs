@@ -17,35 +17,30 @@ namespace Budgeteer.WebApi.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Transaction> GetTransactions(int pageNumber = 0, int pageSize = 10)
+        public IEnumerable<Transaction> GetTransactions(int pageNumber = 0, int pageSize = 30)
         {
 
-            var returns = new List<Transaction>() { };
-            var transactions = this._transactionContext.Transactions
-                .OrderBy(t => t.Id)
+            var results = from transaction in this._transactionContext.Transactions
+                .OrderByDescending(t => t.Date)
                 .Skip(pageNumber * pageSize)
                 .Take(pageSize)
-                .ToList();
+                          join category in this._transactionContext.Categories on transaction.CategoryId equals category.Id
+                          select new Transaction
+                          {
+                              Id = transaction.Id,
+                              Vendor = transaction.Vendor,
+                              Amount = transaction.Amount,
+                              Date = transaction.Date,
+                              Category = new Category
+                              {
+                                  Id = category.Id,
+                                  Name = category.Name,
+                                  Color = category.Color,
+                              }
+                          };
 
-            foreach (var transaction in transactions)
-            {
-                var category = this._transactionContext.Categories.FirstOrDefault(category => category.Id == transaction.CategoryId);
-                returns.Add(new Transaction
-                {
-                    Id = transaction.Id,
-                    Vendor = transaction.Vendor,
-                    Amount = transaction.Amount,
-                    CategoryId = transaction.CategoryId,
-                    Category = new Category
-                    {
-                        Id = category.Id,
-                        Name = category.Name,
-                        Color = category.Color,
-                    },
-                });
-            }
 
-            return returns;
+            return results;
         }
     }
 }

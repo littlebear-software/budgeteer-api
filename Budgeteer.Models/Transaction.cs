@@ -1,11 +1,17 @@
-﻿namespace Budgeteer.Models;
+﻿using System.Text.Json.Serialization;
 
-public class Transaction
+namespace Budgeteer.Models
 {
-    public int Id { get; set; }
-    public string Vendor { get; set; }
-    public decimal Amount { get; set; }
-    public int CategoryId { get; set; }
-    public Category Category { get; set; }
+    public class Transaction
+    {
+        public int Id { get; set; }
+        public string Vendor { get; set; }
+        public decimal Amount { get; set; }
+        public DateTime Date { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public int? CategoryId { get; set; }
+        public Category Category { get; set; }
+
+    }
 
 }
