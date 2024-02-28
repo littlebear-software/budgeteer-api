@@ -13,6 +13,7 @@ namespace Budgeteer.Data.Models
         public string Name { get; set; }
         [Required]
         public string Color { get; set; }
+        public int? ParentCategoryId { get; set; }
         public List<Transaction> Transactions { get; set; }
     }
 }

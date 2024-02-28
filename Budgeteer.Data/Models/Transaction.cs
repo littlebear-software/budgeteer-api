@@ -13,11 +13,11 @@ namespace Budgeteer.Data.Models
         public string Vendor { get; set; }
         [Required]
         public decimal Amount { get; set; }
-        [Required]
-        public int CategoryId { get; set; }
+        // [Required]
+        public int? CategoryId { get; set; }
         public DateTime Date { get; set; }
 
-        public Category Category { get; set; }
+        public Category? Category { get; set; }
 
     }
 }
