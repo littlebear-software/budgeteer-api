@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Budgeteer.Models;
 using Budgeteer.Data.Contexts;
+using DataTransaction = Budgeteer.Data.Models.Transaction;
 
 namespace Budgeteer.WebApi.Controllers
 {
@@ -41,6 +42,21 @@ namespace Budgeteer.WebApi.Controllers
 
 
             return results;
+        }
+
+        [HttpPost]
+        public void PostTransaction(Transaction transaction)
+        {
+            Console.WriteLine(transaction);
+            this._transactionContext.Add<DataTransaction>(new DataTransaction
+            {
+                Id = transaction.Id,
+                Vendor = transaction.Vendor,
+                Amount = transaction.Amount,
+                CategoryId = transaction.CategoryId,
+                Date = transaction.Date,
+            });
+            this._transactionContext.SaveChanges();
         }
     }
 }
