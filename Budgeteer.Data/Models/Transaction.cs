@@ -15,9 +15,9 @@ namespace Budgeteer.Data.Models
         public decimal Amount { get; set; }
         // [Required]
         public int? CategoryId { get; set; }
+        public int? SubCategoryId { get; set; }
         public DateTime Date { get; set; }
 
         public Category? Category { get; set; }
-
     }
 }

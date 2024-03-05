@@ -25,7 +25,7 @@ namespace Budgeteer.WebApi.Controllers
                 .OrderByDescending(t => t.Date)
                 .Skip(pageNumber * pageSize)
                 .Take(pageSize)
-                          join category in this._transactionContext.Categories on transaction.CategoryId equals category.Id
+                          join category in this._transactionContext.Categories on transaction.SubCategoryId ?? transaction.CategoryId equals category.Id
                           select new Transaction
                           {
                               Id = transaction.Id,
@@ -47,7 +47,6 @@ namespace Budgeteer.WebApi.Controllers
         [HttpPost]
         public void PostTransaction(Transaction transaction)
         {
-            Console.WriteLine(transaction);
             this._transactionContext.Add<DataTransaction>(new DataTransaction
             {
                 Id = transaction.Id,
